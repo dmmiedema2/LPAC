@@ -10,20 +10,16 @@ PROCEDURE
 
 DEPENDENCY
 
-CNH.m           available at https://github.com/dmmiedema/CNH. Description in Van Dijk et al., Nature Communications 2021 (https://doi.org/10.1038/s41467-021-23384-6).
+1) CNH.m           available at https://github.com/dmmiedema/CNH. Description in Van Dijk et al., Nature Communications 2021 (https://doi.org/10.1038/s41467-021-23384-6).
 
 INPUT
 
-bin_val         Nb x Ns size array containing relative CNA values of bins
-                of equal size. With Nb the number of bins, and Ns the
-                number of multi-region samples. The number of input samples should be 2 or more (Ns > 1).
-                NOTE: the input bin-values should be non-log values, and
-                should be normalized, i.e. have an average of 1 per sample.
+1) bin_val      Nb x Ns size array containing relative CNA values of bins of equal size. With Nb the number of bins, and Ns the number of multi-region samples. The number of input samples should be 2 or more (Ns > 1). NOTE: the input bin-values should be non-log values, and should be normalized, i.e. have an average of 1 per sample.
 
 OUTPUT
 
-LPAC_success    Binary variable with 1 if LPAC inference was succesfull and 0 if unsuccesfull
-ploidies        Ns x 1 size vector containing the tumor ploidies
-purities        Ns x 1 size vector containing the sample purities
-CNH             Ns x 1 size vector containing the copy number heterogeneity
-best_sample   Ns x 1 size binary vector in which the best sample used for multi-region inference is identified.
+1) LPAC_success    Binary variable with 1 if LPAC inference was succesfull and 0 if unsuccesfull
+2) ploidies        Ns x 1 size vector containing the tumor ploidies
+3) purities        Ns x 1 size vector containing the sample purities
+4) CNH             Ns x 1 size vector containing the copy number heterogeneity
+5) best_sample     Ns x 1 size binary vector in which the best sample used for multi-region inference is identified.
