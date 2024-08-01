@@ -1,6 +1,8 @@
 L-PAC: MATLAB function for determining absolute copy number alterations (CNAs) from multi-region data
 L-PAC leverages information from high-purity samples to improve the
 inference of CNAs from low-purity samples from the same tumor.
+Please note that the description below is for default L-PAC corresponding to the MATLAB function  "LPAC.m". 
+A generalized version of which gives the user more flexibility is provided as the MATLAB function "LPAC_generalized.m". The description of how to use the generalized version of LPAC can be found in the MATLAB file "LPAC_generalized.m".
 
 PROCEDURE
 1) Single-sample inference of absolute CNAs by the CNH.m algorithm (available at https://github.com/dmmiedema/CNH)
