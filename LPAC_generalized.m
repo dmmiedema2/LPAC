@@ -52,8 +52,11 @@
 %% MAIN FUNCTION
 
 function [LPAC_success, ploidies, purities, CNHout, best_sample] = LPAC_generalized(seg_val, seg_len, candidate_best_samples, purity_ref, ploidy_ref)
+    % parameters:
+    bin_size = 10^5; %size of underlying bins in segmented CNA data. Used only in case segmented data is given is input.
+
     % determine sample size and number of bins
-    [~,Ns] = size(seg_val);    
+    [Nseg,Ns] = size(seg_val);    
     CNHout = zeros(Ns,1);
     ploidies = zeros(Ns,1);
     purities = zeros(Ns,1);
@@ -64,17 +67,16 @@ function [LPAC_success, ploidies, purities, CNHout, best_sample] = LPAC_generali
     % check if input consist of segments (seg_len > 1) or bins (seg_len ==
     % 1): expand segments to bins
     if sum( seg_len > 1) > 0
-        bin_size = 10^5;
+        Nbin = ceil(sum(seg_len) / bin_size);
+        bin_val = zeros(Nbin,Nbin);
         for i = 1:Ns
-            Nbin = ceil(sum(seg_len) / bin_size);
-            bin_val = zeros(Nbin,1);
             cc = 1;
-            for i2 = 1:numel(len)
-                db = round(len(i2) / bin_size);
-                bin_val(cc:cc+db-1) = seg_val(i2);
+            for i2 = 1:Nseg
+                db = round(seg_len(i2) / bin_size);
+                bin_val(cc:cc+db-1,i) = seg_val(i2,i);
                 cc = cc+db;
             end
-            bin_val = bin_val(1:Nbin);
+            bin_val = bin_val(1:Nbin,:);
         end
     else
         bin_val = seg_val;
@@ -159,7 +161,7 @@ function [LPAC_success, ploidies, purities, CNHout, best_sample] = LPAC_generali
         cna_abs_ref = a1 * bin_val(:,id) + a2;
         
         % define purities and ploidies for grid search
-        alphas = 0.1:0.01:1;
+        alphas = 0.02:0.01:1;
         taus = 1.5:0.05:5;
         % loop over non-best samples
         ids = find(~best_sample);
